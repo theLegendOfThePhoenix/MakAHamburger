@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import pickIngredients from '../utils/pickIngredients';
+import ingredients from '../data/ingredients.json';
 
-function GenButton() {
+function GenButton({ setListIngredients }) {
     const [bgColor, setBgColor] = useState('#69cdff');
     const [isHovering, setIsHovering] = useState(true);
     const [clicked, setClicked] = useState(false);
@@ -23,6 +25,12 @@ function GenButton() {
         }
     }, [isHovering, clicked]);
 
+    const gen = () => {
+        let chosenIngredients = pickIngredients(ingredients);
+        console.log(chosenIngredients);
+        setListIngredients(chosenIngredients);
+    };
+
     return (
         <div className='h-center'>
             <button
@@ -30,7 +38,10 @@ function GenButton() {
                 id='gen-button'
                 onMouseOver={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                onMouseDown={() => setClicked(true)}
+                onMouseDown={() => {
+                    setClicked(true);
+                    gen();
+                }}
                 style={{
                     backgroundColor: bgColor,
                 }}

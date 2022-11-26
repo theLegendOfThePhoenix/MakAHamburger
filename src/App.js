@@ -1,11 +1,19 @@
 import React from 'react';
-import ingredients from './data/ingredients.json';
-import GenButton from './GenButton';
+import { useState } from 'react';
+import GenButton from './components/GenButton';
+import IngredientsList from './components/IngredientsList';
 
 function App() {
+    let [listIngredients, setListIngredients] = useState([]);
+
+    console.log('rendering');
+
     return (
         <>
-            <GenButton />
+            <GenButton setListIngredients={setListIngredients} />
+            <div id='ingredientsListAndImage'>
+                <IngredientsList listIngredients={listIngredients} />
+            </div>
         </>
     );
 }
